@@ -5,10 +5,8 @@ S0 = 1000; % initial susceptibles
 I0 = 1; % initial base strain/class infection
 n = 60; % number of classes possible;
 totalTime = 120;
-a = 0.9; % immunity distance parameter
+a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
 b = 100;
-%d = 0.8;
-%dMax=.98;
 
 
 y0 = [S0; I0; zeros(n,1)]; % initial conditions as column vector
