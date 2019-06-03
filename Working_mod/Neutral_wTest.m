@@ -1,4 +1,4 @@
-function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a)
+function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a, N)
     % y is the vector of S and I values
     % note that S = y(1), I_0 = y(2), and I_n = y(length(y))
     % dydt = @detection1; Probably don't have to use this unless I rewrite d as a function
@@ -12,7 +12,8 @@ function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a)
     %% Parameters for 'd' or detection for loop
     sensitivity = 0.78; % test sensitivity - from Harkins and Munson:low end of Commercial Nucleic Acid Hybridization test on 16s rRNA
     testRate = 0.0483; % https://www.cdc.gov/std/stats17/chlamydia.htm
-    dMax = sensitivity * testRate; % Still need to adjust testRate unless plan to model in years
+    %dMax = sensitivity * testRate; % Still need to adjust testRate unless plan to model in years
+    dMax = 0.48;
     
     %% For loop for detection variable, 'd'
     for K = 1:(n-1)
@@ -20,7 +21,7 @@ function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a)
     
         %% Main equations other than Ik
         % first the equation for S:
-        dydt(1) = -myBeta * S * sum( y(2:nPlus2) )+ b;  % this is dS/dt 
+        dydt(1) = b*N - myBeta * S * sum( y(2:nPlus2) );  % this is dS/dt 
 
         % next the equation for class 0 of the influenza
         dydt(2) = myBeta * S * y(2) - (nu + mu + d) * y(2); % this is dI0/dt

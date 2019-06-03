@@ -1,22 +1,21 @@
-
 % neutral model call
-
+N=1000;
 S0 = 1000; % initial susceptibles
-I0 = 1; % initial base strain/class infection
+I0 = 25; % initial base strain/class infection
 n = 60; % number of classes possible;
-totalTime = 120;
+totalTime = 50;
 a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
-b = 100;
+b = 0.7; % Annual population growth rate US
 
 
 y0 = [S0; I0; zeros(n,1)]; % initial conditions as column vector
-myBeta = 1.2;  % transmission parameter
-mu = 0.01;  % strain mutation parameter
-nu = 0.2;   %   
+myBeta = 0.003;  % transmission parameter
+%mu = 0.9398;  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene
+mu = 0.249;  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene. https://jb.asm.org/content/191/23/7182
+nu = 0.5;   % composite recovery and death rate parameter
 
-% dydt = NeutralModelFn(t, y, myBeta, nu, mu)
 
-[time, abundances] = ode45( @(time, abundances) Neutral_wTest(time, abundances, myBeta, nu, mu, b, a), [0, totalTime], y0 );
+[time, abundances] = ode45( @(time, abundances) Neutral_wTest(time, abundances, myBeta, nu, mu, b, a, N), [0, totalTime], y0 );
 
 
 % cols=[3:5:n];
@@ -25,18 +24,14 @@ nu = 0.2;   %
 % end
 
 
-plotCols = [3, 10, 20, 30, 40, 50, 60];
+plotCols = [3, 15, 30, 45, 60];
+figure(1)
 for i = 1:length(plotCols)
     subplot(length(plotCols),1,i);
     plot(time, abundances(:,plotCols(i)));
 end
 
-
-
-% function detection = d(k, a)
-%     sensitivity = 0.78; % test sensitivity - from Harkins and Munson:low end of Commercial Nucleic Acid Hybridization test on 16s rRNA
-%     testRate = 0.0483; % https://www.cdc.gov/std/stats17/chlamydia.htm
-%     a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
-%     dMax = sensitivity * testRate;
-%     detection = dMax * exp(-k * a);
-% end
+figure(2)
+Sum = sum(abundances, 2);
+plot(time, Sum);
+xlim([0 15]);
