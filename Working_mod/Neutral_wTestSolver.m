@@ -10,7 +10,7 @@ N=1000;
 S0 = 1000; % initial susceptibles
 I0 = 25; % initial base strain/class infection
 n = 60; % number of classes possible;
-totalTime = 250;
+totalTime = 100;
 a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
 b = 0.7; % Annual population growth rate US
 
@@ -22,7 +22,7 @@ mu = 0.249;  % strain mutation parameter - definitely need to adjust, but curren
 nu = 0.5;   % composite recovery and death rate parameter
 
 
-[time, abundances] = ode45( @(time, abundances) Neutral_wTest_SMFcomment(time, abundances, myBeta, nu, mu, b, a, N), [0, totalTime], y0 );
+[time, abundances] = ode45( @(time, abundances) Neutral_wTest(time, abundances, myBeta, nu, mu, b, a, N), [0, totalTime], y0 );
 
 
 % cols=[3:5:n];
@@ -43,5 +43,5 @@ xlabel('Years')
 
 figure(2)
 Sum = sum(abundances, 2);
-plot(time, Sum);
-xlim([0 15]);
+plot(time, Sum, 'linewidth', 2);
+%xlim([0 15]);
