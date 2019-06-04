@@ -22,7 +22,7 @@ mu = 0.249;  % strain mutation parameter - definitely need to adjust, but curren
 nu = 0.5;   % composite recovery and death rate parameter
 
 
-[time, abundances] = ode45( @(time, abundances) Neutral_wTest(time, abundances, myBeta, nu, mu, b, a, N), [0, totalTime], y0 );
+[time, abundances] = ode45( @(time, abundances) Neutral_wTest_SMFcomment(time, abundances, myBeta, nu, mu, b, a, N), [0, totalTime], y0 );
 
 
 % cols=[3:5:n];

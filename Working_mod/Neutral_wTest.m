@@ -30,10 +30,12 @@ function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a, N)
         dydt(1) = b*N - myBeta * S * sum( y(2:nPlus2) );  % this is dS/dt 
 
         % next the equation for class 0 of the influenza
-        dydt(2) = myBeta * S * y(2) - (nu + mu + d) * y(2); % this is dI0/dt
+        det = dMax * exp(0 * a);
+        dydt(2) = myBeta * S * y(2) - (nu + mu + det) * y(2); % this is dI0/dt
 
         % the last special case is the last strain, class "n" in mathematical notation, i.e., dIn/dt:
-        dydt(nPlus2) = myBeta * S * y(nPlus2) - (nu + d) * y(nPlus2) + mu * y(nPlus2 - 1);% dIn/dt
+        DET = dMax * exp(n * a);
+        dydt(nPlus2) = myBeta * S * y(nPlus2) - (nu + DET) * y(nPlus2) + mu * y(nPlus2 - 1);% dIn/dt
 
         %% now d/dt:
         for k = 1:(n-1) % iterating over all strains from strain 1 to strain n - 1
