@@ -1,3 +1,9 @@
+% Next steps:
+% 1.) figure out if the 'd' function is working
+    % if the code is working as expected, rethink the math or parameter values
+% 2.) Figure out why code crashes for b*S (rather than b*N) about half the time - depending upon max time 
+% 3.) Everything else - actually get at the selection pressure and pop-gen values
+
 function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a, N)
     % y is the vector of S and I values
     % note that S = y(1), I_0 = y(2), and I_n = y(length(y))

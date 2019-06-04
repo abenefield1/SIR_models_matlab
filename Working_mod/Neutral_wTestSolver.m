@@ -1,9 +1,16 @@
+% Next steps:
+% 1.) figure out if the 'd' function is working
+    % if the code is working as expected, rethink the math or parameter values
+% 2.) Figure out why code crashes for b*S (rather than b*N) about half the time - depending upon max time 
+% 3.) Everything else - actually get at the selection pressure and pop-gen values
+
+
 % neutral model call
 N=1000;
 S0 = 1000; % initial susceptibles
 I0 = 25; % initial base strain/class infection
 n = 60; % number of classes possible;
-totalTime = 50;
+totalTime = 250;
 a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
 b = 0.7; % Annual population growth rate US
 
@@ -23,13 +30,16 @@ nu = 0.5;   % composite recovery and death rate parameter
 %     plot(time, abundances(:,cols(i)));
 % end
 
-
-plotCols = [3, 15, 30, 45, 60];
+set(gca, 'FontName', 'Times New Roman')
+plotCols = [3, 30, 60];
 figure(1)
 for i = 1:length(plotCols)
     subplot(length(plotCols),1,i);
     plot(time, abundances(:,plotCols(i)));
 end
+sgtitle('Abundance of Strain Variants')
+xlabel('Years')
+[ax,h2]=suplabel('Abundance of Infectious Classes','y'); 
 
 figure(2)
 Sum = sum(abundances, 2);
