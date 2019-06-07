@@ -19,12 +19,12 @@ function dydt = Neutral_wTest(time, y, myBeta, nu, mu, b, a, N)
     sensitivity = 0.78; % test sensitivity - from Harkins and Munson:low end of Commercial Nucleic Acid Hybridization test on 16s rRNA
     testRate = 0.0483; % https://www.cdc.gov/std/stats17/chlamydia.htm
     %dMax = sensitivity * testRate; % Still need to adjust testRate unless plan to model in years
-    dMax = 0;
+    dMax = 1;
    
     
         %% Main equations other than Ik
         % first the equation for S:
-        dydt(1) = b*S - myBeta * S * sum( y(2:nPlus2) );  % this is dS/dt 
+        dydt(1) = b*N - myBeta * S * sum( y(2:nPlus2) );  % this is dS/dt 
 
         % next the equation for class 0 of the influenza
         det = dMax * exp(-0 * a);

@@ -6,21 +6,21 @@
 
 
 % neutral model call
-N=1000;
+N=S0+I0;
 S0 = 1000; % initial susceptibles
 I0 = 25; % initial base strain/class infection
 n = 60; % number of classes possible;
-totalTime = 100;
+totalTime = 300;
 a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
-b = 0.7; % Annual population growth rate US
-
+b = 0.015; % births 0.015^-1/yr THIS IS THE CORRECT BIRTH RATE
 
 y0 = [S0; I0; zeros(n,1)]; % initial conditions as column vector
-myBeta = 0.003;  % transmission parameter
+%myBeta = 0.0294;  % transmission parameter; based on calculations CORRECT
+myBeta = 0.72;
 %mu = 0.9398;  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene
 mu = 0.249;  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene. https://jb.asm.org/content/191/23/7182
-nu = 0.5;   % composite recovery and death rate parameter
-
+%nu = 0.0384;   % composite recovery rate parameter
+%nu=0.0534
 
 [time, abundances] = ode45( @(time, abundances) Neutral_wTest(time, abundances, myBeta, nu, mu, b, a, N), [0, totalTime], y0 );
 
@@ -44,4 +44,4 @@ xlabel('Years')
 figure(2)
 Sum = sum(abundances, 2);
 plot(time, Sum, 'linewidth', 2);
-%xlim([0 15]);
+ylim([0 1100]);
