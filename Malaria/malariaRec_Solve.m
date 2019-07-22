@@ -10,11 +10,11 @@
 % neutral model call
 S0 = 1000; % initial susceptibles
 I0 = 20; % initial base strain/class infection
-I10=15;
-I20=10;
-I30=5;
-n = 60; % number of classes possible;
-totalTime = 200;
+I10=0; %I10=15;
+I20=0; %I20=10;
+I30=0; %I30=5;
+n=100; %n = 60; % number of classes possible;
+totalTime = 100;
 a = 0.12; % testing escape parameter - the higher a, the more rapid the escape
 b = 0.015; % births 0.015^-1/yr THIS IS THE CORRECT BIRTH RATE AND IT CREATES GOOD MODEL
 %b=0.7;
@@ -23,15 +23,11 @@ N=S0+I0+I10+I20+I30;
 
 
 y0 = [S0; I0;I10;I20;I30 ;zeros(n-3,1)]; % initial conditions as column vector
-%myBeta = 0.0294;  % transmission parameter; based on calculations CORRECT
-myBeta = 0.5;
-%mu = 0.9398;  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene
-mu = 0.249;  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene. https://jb.asm.org/content/191/23/7182
-%mu = 3;
-%mu = 0.002;
+myBeta = 0.5; %myBeta = 0.0294;  % transmission parameter; based on calculations CORRECT
+mu = 0.9398; %mu = 0.249; %mu = 3; %mu = 0.002;% strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene
+  % strain mutation parameter - definitely need to adjust, but currently in units of subs/site of the ompA C. trachomatis gene. https://jb.asm.org/content/191/23/7182
 death = 0.015; % death rate (natural) same as birth rate
 gamma=0.06; % rate of loss of immunity
-%nu = gamma + death;   % composite recovery rate/death rate parameter
 nu=0.0384; %recovery rate
 
 
