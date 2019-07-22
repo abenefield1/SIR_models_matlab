@@ -46,7 +46,7 @@ function dydt = malariaRec_FN(time, y, myBeta, nu, mu, a, N, b, gamma)
             d = dMax * exp(-k * a); % Sam added this here and changed "K" to "k"
             Ik = y(index);
             dydt(index) = myBeta * S * Ik - ((nu + mu + d) * Ik) + (mu * y(index - 1)); % dIk/dt
-            dydt(nPlus2) = ((nu + d) * sum( y(2:(nPlus2-1)) )) - gamma * R; % dR/dt
+            dydt(nPlus2) = ((nu) * sum( y(2:(nPlus2-1)).*d )) - gamma * R; % dR/dt
         end
    
     
