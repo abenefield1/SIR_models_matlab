@@ -1,6 +1,6 @@
 %Initial Conditions:
 S_0 = 1000;
-I_0=50; 
+I_0=1; 
 R_0=0;
 N = S_0+ I_0 + R_0;
 b=100;
@@ -25,7 +25,8 @@ R=class(:,3);
 
 %% 100:150 - post vaccination
 
-betavec = [0, 0.0003, 0.0004];
+betavec = [0, 0.0002, 0.0003, 0.0004];
+Names=string(betavec);
 n = length(betavec);
 figure
 for i = 1:n
@@ -37,8 +38,6 @@ for i = 1:n
     I=class2(:,2);
     R=class2(:,3);
 
-
-    
     
     subplot(n,1,i)
     plot(t,S,'k','LineWidth',2); hold on
@@ -48,5 +47,10 @@ for i = 1:n
     ylabel('Incidence')
    % h=legend('R',-1);
     h=legend('Susceptible (S)', 'Infected (I)','Recovered (R)','Location','northwest');
+    title(sprintf('$\\beta= %s$',Names{i}),'Interpreter','latex', 'FontSize', 12, 'FontName', 'Times New Roman');
+    R_nought=(beta*b)/(D*(D + nu));
+    text(65,max(S)*0.8,sprintf('$R_{0}= %.4f$',R_nought),'Interpreter','latex', 'FontSize', 12, 'FontName', 'Times New Roman')
+
+
 end
 xlabel('Years')
