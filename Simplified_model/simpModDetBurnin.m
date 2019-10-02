@@ -6,24 +6,23 @@ N = S_0+ I_0 + R_0;
 b=100; % birth rate into susceptible
 D=0.1; % death rate (independent of disease)
 
-%vaccTime = 100;
-%endTime = 150;
-%T1 = 0:vaccTime;
-%T2 = vaccTime:endTime;
-T2 = 0:150; % Time
+detTime = 50;
+endTime = 150;
+T1 = 0:detTime;
+T2 = detTime:endTime;
 
 nu=0.2; % Recovery rate
 beta=0.0004; % Transmission rate
-det=0.5
-%% 0:100 - pre vaccination
+%% 0:500 - pre MDT: burn-in
+det=0;
 
-[t, class]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2,[S_0 I_0 R_0]);
+[t, class]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T1,[S_0 I_0 R_0]);
 S=class(:,1);
 I=class(:,2);
 R=class(:,3);
 
 
-%% 100:150 - post vaccination
+%% 50:150 - post MDT: after burn-in
 DetVec=[1, 0.5, 0.11, 0.09, 0.009, 0.0009,0.0001, 0];
 Names=string(DetVec);
 n = length(DetVec);
@@ -45,7 +44,7 @@ for i = 1:n
     ylabel('Incidence')
     title(sprintf('$d_{k}= %s$',Names{i}),'Interpreter','latex', 'FontSize', 12, 'FontName', 'Times New Roman');
     R_nought=(beta*b)/(D*(D + nu + det));
-    text(65,max(S)*0.8,sprintf('$R_{0}= %.4f$',R_nought),'Interpreter','latex', 'FontSize', 12, 'FontName', 'Times New Roman')
+    text(100,max(S)*0.8,sprintf('$R_{0}= %.4f$',R_nought),'Interpreter','latex', 'FontSize', 12, 'FontName', 'Times New Roman')
     grid on
 end
 suplabel('Years')
