@@ -1,3 +1,4 @@
+%Test
 %Initial Conditions:
 S_0 = 1000;
 I_0_0=25;
