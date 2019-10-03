@@ -3,7 +3,8 @@ S_0 = 1000; % Susceptible
 I_0=1; % Infected
 R_0=0; % Recovered
 N = S_0+ I_0 + R_0;
-b=100; % birth rate into susceptible
+%b=100; % birth rate into susceptible
+b=0.1;
 D=0.1; % death rate (independent of disease)
 
 %vaccTime = 100;

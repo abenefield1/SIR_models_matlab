@@ -11,7 +11,7 @@ R=class(3);
 %f(1,1)= $-\betaSI$;
 %f(2,1)=$\beta SI-\nuI$
 
-f(1,1)= -beta*S*I + b; %  Susceptible
+f(1,1)= -beta*S*I + b*N; %  Susceptible
 f(2,1)= beta*S*I - (nu + det + D)*I; %  Iaccine-Infected
 f(3,1)= (nu + det)*I - D*R; %  Recovered
 end
