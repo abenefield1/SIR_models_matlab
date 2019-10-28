@@ -14,7 +14,10 @@ totalT=0:endTime;
 
 nu=0.2; % Recovery rate
 beta=0.001; % Transmission rate
-%% 0:50 - pre MDT: burn-in
+%% 0:50 - burn-in (no detection rate)
+%%
+% $R_{0}=\frac{\beta b}{\delta(\delta+\nu)}$
+
 det=0;
 
 [t, class]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T1,[S_0 I_0 R_0]);
@@ -23,7 +26,10 @@ I=class(:,2);
 R=class(:,3);
 
 
-%% 50:150 - post MDT: after burn-in
+%% 50:150 - detection added after burn-in
+%%
+% $R_{0}=\frac{\beta b}{\delta(\delta+\nu+d_{k})}$
+
 DetVec=[1, 0.5, 0.11, 0.09, 0.009, 0.0009,0.0001, 0];
 Names=string(DetVec);
 n = length(DetVec);
