@@ -2,6 +2,7 @@
 S_0 = 1000; % Susceptible
 I_1_0=1; % Infected
 I_2_0=0;
+I_n_0=0;
 R_0=0; % Recovered
 b=100; % birth rate into susceptible
 D=0.1; % death rate (independent of disease)
@@ -22,19 +23,21 @@ beta=0.001; % Transmission rate
 
 det=0;
 
-[t, class]=ode45(@(t, class) simpMut(t, class, N, beta, nu, b, D, det, mu), T1,[S_0 I_1_0 I_2_0 R_0]);
+[t, class]=ode45(@(t, class) simpMut(t, class, N, beta, nu, b, D, det, mu), T1,[S_0 I_1_0 I_2_0 R_0 I_n_0]);
 S=class(:,1);
 I_1=class(:,2);
 I_2=class(:,3);
-R=class(:,4);
+I_n=class(:,4);
+R=class(:,5);
 
-figure(1)
+orange=[0.8500, 0.3250, 0.0980];
+figure(1);
 p1=plot(t,S,'g','LineWidth',2); hold on
 p2=plot(t,I_1,'r','LineWidth',2); hold on
 p3=plot(t,I_2,'m','LineWidth',2); hold on
-p4=plot(t,R,'b','LineWidth',2); hold on
-legend("S","I_1","I_2","R")
+p4=plot(t,I_n,'color', orange,'LineWidth',2); hold on
+p5=plot(t,R,'b','LineWidth',2); hold on
+legend("S","I_1","I_2","I_n","R");
 
 
 clear all
-clc
