@@ -2,9 +2,9 @@
 S_0 = 1000; % Susceptible
 I_0=1; % Infected
 R_0=0; % Recovered
-N = S_0+ I_0 + R_0;
-b=0.1; % birth rate into susceptible
+b=100; % birth rate into susceptible
 D=0.1; % death rate (independent of disease)
+N=1000;
 
 detTime = 50;
 endTime = 150;
@@ -13,7 +13,7 @@ T2 = detTime+1:endTime;
 totalT=0:endTime;
 
 nu=0.2; % Recovery rate
-beta=0.0004; % Transmission rate
+beta=0.001; % Transmission rate
 %% 0:50 - pre MDT: burn-in
 det=0;
 
@@ -30,8 +30,6 @@ n = length(DetVec);
 figure(1)
 for i = 1:n
     det = DetVec(i);
-    sigma=0.5;
-    deltaI=0.2;
     [t, class2]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2, class(size(class,1),:) );
     S=class2(:,1);
     I=class2(:,2);
@@ -62,8 +60,6 @@ n = length(DetVec);
 figure(2)
 for i = 1:n
     det = DetVec(i);
-    sigma=0.5;
-    deltaI=0.2;
     [t, class2]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2, class(size(class,1),:) );
     S=class2(:,1);
     I=class2(:,2);
@@ -102,8 +98,6 @@ n = length(DetVec);
 figure(3)
 for i = 1:n
     det = DetVec(i);
-    sigma=0.5;
-    deltaI=0.2;
     [t, class2]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2, class(size(class,1),:) );
     S=class2(:,1);
     I=class2(:,2);
@@ -127,8 +121,6 @@ n = length(DetVec);
 figure(4)
 for i = 1:n
     det = DetVec(i);
-    sigma=0.5;
-    deltaI=0.2;
     [t, class2]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2, class(size(class,1),:) );
     classes=vertcat(class,class2);
     S=classes(:,1);
@@ -155,3 +147,4 @@ newPosition = [0.4 0.87 0.2 0.2];
 newUnits = 'normalized';
 set(hL,'Position', newPosition,'Units', newUnits, 'color','none','Box','off');
 
+clear all

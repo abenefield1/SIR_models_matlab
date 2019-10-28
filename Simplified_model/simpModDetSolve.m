@@ -15,7 +15,7 @@ T2 = 0:150; % Time
 
 nu=0.2; % Recovery rate
 beta=0.0004; % Transmission rate
-det=0.5
+det=0.3;
 %% 0:100 - pre vaccination
 
 [t, class]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2,[S_0 I_0 R_0]);
@@ -56,31 +56,31 @@ newUnits = 'normalized';
 set(hL,'Position', newPosition,'Units', newUnits, 'color','none','Box','off');
 
 %%
-DetVec=[1, 0.5, 0.11, 0.09, 0.009, 0.0009,0.0001, 0];
-Names=string(DetVec);
-n = length(DetVec);
-figure
-for i = 1:n
-    det = DetVec(i);
-    sigma=0.5;
-    deltaI=0.2;
-    [t, class2]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2, class(size(class,1),:) );
-    S=class2(:,1);
-    I=class2(:,2);
-    R=class2(:,3);
-    
-    %p1=plot(t,S,'g','LineWidth',2); hold on
-    p2=plot(t,I,'r','LineWidth',2); hold on
-    %p3=plot(t,R,'b','LineWidth',2); hold on
-    %axis([0 150 0 3000])
-    ylabel('Incidence')
-    grid on
-end
-suplabel('Years')
-hL = legend([p1,p2,p3],{'Susceptible (S)', 'Infected (I)','Recovered (R)'}, 'Orientation', 'horizontal');
-newPosition = [0.4 0.87 0.2 0.2];
-newUnits = 'normalized';
-set(hL,'Position', newPosition,'Units', newUnits, 'color','none','Box','off');
+% DetVec=[1, 0.5, 0.11, 0.09, 0.009, 0.0009,0.0001, 0];
+% Names=string(DetVec);
+% n = length(DetVec);
+% figure
+% for i = 1:n
+%     det = DetVec(i);
+%     sigma=0.5;
+%     deltaI=0.2;
+%     [t, class2]=ode45(@(t, class) simpModDet(t, class, N, beta, nu, b, D, det), T2, class(size(class,1),:) );
+%     S=class2(:,1);
+%     I=class2(:,2);
+%     R=class2(:,3);
+%     
+%     %p1=plot(t,S,'g','LineWidth',2); hold on
+%     p2=plot(t,I,'r','LineWidth',2); hold on
+%     %p3=plot(t,R,'b','LineWidth',2); hold on
+%     %axis([0 150 0 3000])
+%     ylabel('Incidence')
+%     grid on
+% end
+% suplabel('Years')
+% hL = legend([p1,p2,p3],{'Susceptible (S)', 'Infected (I)','Recovered (R)'}, 'Orientation', 'horizontal');
+% newPosition = [0.4 0.87 0.2 0.2];
+% newUnits = 'normalized';
+% set(hL,'Position', newPosition,'Units', newUnits, 'color','none','Box','off');
 
 
 %%
@@ -106,3 +106,5 @@ set(hL,'Position', newPosition,'Units', newUnits, 'color','none','Box','off');
 %     h=legend('Susceptible (S)', 'Infected (I)','Recovered (R)','Location','northwest');
 % end
 % xlabel('Years')
+
+clear all
