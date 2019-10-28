@@ -1,0 +1,11 @@
+function f=simpMut(t, class, N, beta, nu, b, D, det);
+%% 
+
+S=class(1);
+I_1=class(2);
+R=class(3);
+
+f(1,1)= -beta*S*I_1 + b - D*S; %  Susceptible
+f(2,1)= beta*S*I_1 - (nu + det + D)*I_1; %  Iaccine-Infected
+f(3,1)= (nu + det)*I_1 - D*R; %  Recovered
+end
