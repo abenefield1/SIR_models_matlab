@@ -1,11 +1,13 @@
-function f=simpMut(t, class, N, beta, nu, b, D, det, mu);
-%% 
+function f=simpMut(t, class, N, beta, nu, b, D,det, mu);
 
 S=class(1);
 I_1=class(2);
 I_2=class(3);
 I_n=class(4);
 R=class(5);
+
+%dMax=1;
+%det=dMax * exp(-k * a);
 
 f(1,1)= -beta*S*(I_1 + I_2 + I_n) + b - D*S; %  Susceptible
 f(2,1)= beta*S*I_1 - (nu + det + mu + D)*I_1; %  Strain I1
