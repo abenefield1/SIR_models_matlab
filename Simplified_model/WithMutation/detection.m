@@ -1,4 +1,4 @@
 function det=detection(k, a);
-    dMax=1;
+    dMax=0;
     det=dMax * exp(-k * a);
 end
